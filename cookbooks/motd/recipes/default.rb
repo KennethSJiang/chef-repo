@@ -3,9 +3,9 @@
 # Recipe:: default
 #
 # Copyright (c) 2014 The Authors, All Rights Reserved.
-file "/etc/motd" do
+template "/etc/motd" do
   action :create
-  content "Property of VISER"
+  source "motd.erb"
   mode "0644"
   owner "root"
   group "root"

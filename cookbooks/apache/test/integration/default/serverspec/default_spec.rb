@@ -3,6 +3,26 @@ set :backend, :exec
 
 describe 'apache' do
   it 'is awesome' do
-    expec(true).to eq true
+    expect(true).to eq true
   end 
+
+  it 'is installed' do
+    expect(package "httpd").to be_installed
+  end
+
+  it 'is running' do
+    expect(service "httpd").to be_running
+  end
+
+  it 'is responding to http requests' do
+    expect(host('localhost')).to be_reachable 
+  end
+
+  it 'is displaying the proper home page' do
+    expect(command("curl http://localhost").stdout).to match /hello/i
+  end
+
+  it 'is running on the default port' do
+    expect(port 80).to be_listening.with("tcp")
+  end
 end
